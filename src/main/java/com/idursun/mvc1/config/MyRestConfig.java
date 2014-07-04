@@ -16,7 +16,6 @@ public class MyRestConfig extends RepositoryRestMvcConfiguration {
     private static Log logger = LogFactory.getLog(MyRestConfig.class);
 
     @Override protected void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-        super.configureRepositoryRestConfiguration(config);
         try {
             config.setBaseUri(new URI("/rest"));
         } catch (URISyntaxException e) {
