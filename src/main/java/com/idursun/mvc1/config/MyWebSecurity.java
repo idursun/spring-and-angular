@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 
 @Configuration
@@ -18,7 +20,7 @@ public class MyWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("123").roles("USER");
+        auth.inMemoryAuthentication().withUser("admin").password("123").roles("USER","CLIENT");
     }
 
     @Override
@@ -29,13 +31,22 @@ public class MyWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.authorizeRequests()
                 .antMatchers("/oauth/**").permitAll()
-                .anyRequest().authenticated()
+
+                //.anyRequest().authenticated()
             .and()
                 .httpBasic()
             .and()
-                .csrf().disable();
-    }
+                .csrf().disable()
+            .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.NEVER)
+            .and()
+                .authorizeRequests()
+                    .antMatchers("/rest/**").hasRole("USER");
+    }
 }
