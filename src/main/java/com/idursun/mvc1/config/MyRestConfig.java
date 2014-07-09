@@ -15,7 +15,8 @@ import java.net.URISyntaxException;
 public class MyRestConfig extends RepositoryRestMvcConfiguration {
     private static Log logger = LogFactory.getLog(MyRestConfig.class);
 
-    @Override protected void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+    @Override
+    protected void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         try {
             config.setBaseUri(new URI("/rest"));
         } catch (URISyntaxException e) {
