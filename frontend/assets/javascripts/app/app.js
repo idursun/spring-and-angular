@@ -1,6 +1,6 @@
 define(['angular'], function (angular) {
 
-  var app = angular.module('myApp',['restangular', 'ui.router'])
+  var app = angular.module('myApp',['services', 'restangular', 'ui.router'])
 
   app.controller('MainCtrl', ['$scope', function ($scope) {
     $scope.message = "message goes here"
@@ -14,16 +14,20 @@ define(['angular'], function (angular) {
     $stateProvider.state('login', { url: '/login', templateUrl: 'templates/login.html' })
   })
 
-  app.config(function($httpProvider) {
-      $httpProvider.interceptors.push(function($q, $location) {
-          return {'responseError' : function(rejection) {
-              if(rejection.status == 401) {
-                  $location.url('/login')
-              }
-              return $q.reject(rejection);
-          }}
-      })
-  })
+  app.config(['$httpProvider','TokenServiceProvider', function($httpProvider, TokenServiceProvider) {
+    $httpProvider.interceptors.push(function($q, $location) {
+      return {'responseError' : function(rejection) {
+          if(rejection.status == 401) {
+              $location.url('/login')
+          }
+          return $q.reject(rejection);
+      }}
+    })
+
+    //TokenServiceProvider.setBaseUrl('http://localhost:8080')
+    TokenServiceProvider.setTokenUrl('/oauth/token')
+    TokenServiceProvider.setLoginUrl('/login')
+  }])
 
   app.config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('/rest/')
