@@ -1,9 +1,6 @@
 package com.idursun.mvc1.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +14,16 @@ public class Project {
     private String name;
     private Date createdOn;
     private Date modifiedOn;
+    @ManyToOne(optional = true)
+    private User createdBy;
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
 
     public Long getId() {
         return id;
