@@ -19,6 +19,11 @@ exports.config = {
       "extension": "html"
     }
   },
+  "jshint": {
+      "rules": {
+          "asi" : "-"
+      }
+  },
   "webPackage" : {
       //outPath: "../src/main/resources/public",
       exclude: [
