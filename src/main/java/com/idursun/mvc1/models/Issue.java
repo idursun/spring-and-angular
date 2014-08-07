@@ -1,9 +1,6 @@
 package com.idursun.mvc1.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Issue {
@@ -11,5 +8,8 @@ public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @ManyToOne
+    private Project project;
 
 }
