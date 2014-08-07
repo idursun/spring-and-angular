@@ -89,7 +89,11 @@ public class OAuthConfig {
 
         @Override
         public void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests().antMatchers("/rest/**").hasRole("CLIENT");
+            http
+                .authorizeRequests()
+                    .antMatchers("/rest/**").hasRole("CLIENT")
+            .and()
+                .csrf().disable();
         }
     }
 }

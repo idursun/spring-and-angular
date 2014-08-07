@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 
 @Configuration
@@ -37,22 +39,10 @@ public class MyWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        http.authorizeRequests()
-                .antMatchers("/oauth/**").permitAll()
-
-                //.anyRequest().authenticated()
-            .and()
-                .httpBasic()
-            .and()
-                .csrf().disable()
+        http.requestMatcher(new AntPathRequestMatcher("/oauth/**"))
+            .csrf()
+                .disable()
             .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.NEVER)
-            .and()
-                .authorizeRequests()
-                    .antMatchers("/rest/**").hasRole("USER");
     }
 }
