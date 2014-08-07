@@ -4,24 +4,20 @@ import com.idursun.mvc1.models.Project;
 import com.idursun.mvc1.models.User;
 import com.idursun.mvc1.services.ProjectRepository;
 import com.idursun.mvc1.services.UserRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Component
 //@Profile("development")
 public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
-
-    private static Logger logger = Logger.getLogger(DataSeeder.class.toString());
+    private static Logger logger = Logger.getLogger(MyRestConfig.class);
 
     @Autowired
     UserRepository userRepository;

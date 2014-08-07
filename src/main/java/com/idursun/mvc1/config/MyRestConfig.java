@@ -1,7 +1,6 @@
 package com.idursun.mvc1.config;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -13,7 +12,7 @@ import java.net.URISyntaxException;
 @Configuration
 @Import(RepositoryRestMvcConfiguration.class)
 public class MyRestConfig extends RepositoryRestMvcConfiguration {
-    private static Log logger = LogFactory.getLog(MyRestConfig.class);
+    private static Logger logger = Logger.getLogger(MyRestConfig.class);
 
     @Override
     protected void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
