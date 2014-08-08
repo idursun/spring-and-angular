@@ -26,24 +26,28 @@ define(['angular'], function(angular) {
             tokenUrl = url || "/oauth/token";
         }
 
+        this.loginRedirectHandler = angular.noop
+
         this.setClientDetails = function (id, secret) {
             clientId = id;
             clientSecret = secret;
         }
 
-        $httpProvider.interceptors.push(['$q', '$location', 'TokenStore', function ($q, $location, TokenStore) {
+        $httpProvider.interceptors.push(['$q', '$injector', 'TokenStore', function ($q, $injector, TokenStore) {
             return {
                 'request': function (config) {
+                    console.log('inside request ' + clientId + ' ' + clientSecret )
                     if (TokenStore.get()) {
                         config.headers.Authorization = "Bearer " + TokenStore.get();
                     } else if (!!clientId && !!clientSecret) {
                         config.headers.Authorization = "Basic " + window.btoa(clientId + ":" + clientSecret);
                     }
+                    console.log(config.headers.Authorization )
                     return config;
                 },
                 'responseError': function (response) {
-                    if (response.status == 401) {
-                        $location.url(loginUrl);
+                    if (response.status == 401 && loginRedirectHandler !== null) {
+                        $injector.invoke(loginRedirectHandler)
                     }
                     return $q.reject(response);
                 },
@@ -54,6 +58,7 @@ define(['angular'], function(angular) {
             return {
 
                 login: function (username, password) {
+                    console.log("sending " + username)
                     var deferred = $q.defer();
                     $http({
                         method: 'POST',

@@ -38,8 +38,9 @@ public class MyWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class);
+
         http
-                .addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class)
                 .requestMatcher(new AntPathRequestMatcher("/oauth/**"))
                 .csrf()
                     .disable()

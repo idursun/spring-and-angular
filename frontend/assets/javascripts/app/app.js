@@ -6,8 +6,8 @@ define(['angular'], function (angular) {
     $urlRouterProvider
             .otherwise('home')
 
-    $stateProvider.state('home', { url: '/', template: '<p>merhaba millet</p>' })
-    $stateProvider.state('login', { url: '/login', templateUrl: 'templates/login.html' })
+    $stateProvider.state('home', { url: '/', template: '<p>merhaba millet</p>', controller: 'MainController' })
+    $stateProvider.state('login', { url: '/login', templateUrl: 'templates/login.html', controller: 'LoginController' })
   })
 
   app.config(['$httpProvider','TokenServiceProvider', function($httpProvider, TokenServiceProvider) {
@@ -20,12 +20,14 @@ define(['angular'], function (angular) {
       }}
     })
 
-    TokenServiceProvider.setBaseUrl('http://localhost:8080/rest')
-    TokenServiceProvider.setTokenUrl('/oauth/token')
+    console.log(TokenServiceProvider)
 
-    TokenServiceProvider.setLoginRedirectHandler(['$state', function($state) {
+    //TokenServiceProvider.setBaseUrl('http://localhost:8080/rest')
+    TokenServiceProvider.setTokenUrl('http://localhost:8080/oauth/token')
+    TokenServiceProvider.setClientDetails('web', 'secret')
+    TokenServiceProvider.loginRedirectHandler = ['$state', function($state) {
         $state.go('login')
-    }])
+    }]
 
   }])
 
