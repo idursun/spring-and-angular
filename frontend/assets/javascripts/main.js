@@ -28,12 +28,12 @@
         deps: ['angular']
       },
       'app/app' : {
-        deps: ['restangular', 'angularUi', 'services']
+        deps: ['restangular', 'angularUi', 'services', 'directives', 'controllers']
       }
     },
     deps: ['angular'],
-    packages: ['services']
-  }, ['jquery', 'angular', 'app/app', 'services', 'restangular', 'angularUi'], function($, angular, app) {
+    packages: ['services', 'controllers', 'directives']
+  }, ['jquery', 'angular', 'app/app'], function($, angular, app) {
     $(document).ready(function () {
       angular.resumeBootstrap();
     });

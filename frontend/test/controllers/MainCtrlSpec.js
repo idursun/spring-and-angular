@@ -1,8 +1,8 @@
-define(['angular','angularMocks', 'app/app'], function (angular, mocks) {
+define(['angular','angularMocks', 'controllers'], function (angular, mocks) {
   describe('MainCtrl', function () {
     var $scope, ctrl;
 
-    beforeEach(module('myApp'))
+    beforeEach(module('controllers.MainController'))
 
     beforeEach(inject(function ($controller, $rootScope) {
       $scope = $rootScope.$new();

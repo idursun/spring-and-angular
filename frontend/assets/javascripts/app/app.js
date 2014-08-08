@@ -1,10 +1,6 @@
 define(['angular'], function (angular) {
 
-  var app = angular.module('myApp',['services', 'restangular', 'ui.router'])
-
-  app.controller('MainCtrl', ['$scope', function ($scope) {
-    $scope.message = "message goes here"
-  }])
+  var app = angular.module('myApp', ['services', 'controllers', 'directives', 'restangular', 'ui.router'])
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider
@@ -24,30 +20,17 @@ define(['angular'], function (angular) {
       }}
     })
 
-    //TokenServiceProvider.setBaseUrl('http://localhost:8080')
+    TokenServiceProvider.setBaseUrl('http://localhost:8080/rest')
     TokenServiceProvider.setTokenUrl('/oauth/token')
-    TokenServiceProvider.setLoginUrl('/login')
+
+    TokenServiceProvider.setLoginRedirectHandler(['$state', function($state) {
+        $state.go('login')
+    }])
+
   }])
 
   app.config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('/rest/')
-  })
-
-  app.directive('dialog', function($state) {
-      return {
-          restrict: 'A',
-          link: function(scope, elem, attrs, ctrl) {
-              scope.$on('$stateChangeSuccess', function(event, toState) {
-                  if ($state.current.name == toState.name) {
-                      elem.modal('show')
-                  }
-              })
-
-              elem.on('hidden.bs.modal', function(e) {
-                  $state.go('^')
-              })
-          }
-      }
   })
 
   return app;
