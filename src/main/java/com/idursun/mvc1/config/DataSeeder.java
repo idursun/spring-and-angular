@@ -29,7 +29,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         List<User> users = new ArrayList<>();
         List<Project> projects = new ArrayList<>();
-        if ( userRepository.count() == 0) {
+        if (userRepository.count() == 0) {
             for (int i = 0; i < 5; i++) {
                 User user = new User();
                 user.setName("user" + i);

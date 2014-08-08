@@ -26,18 +26,17 @@ public class OAuthConfig {
 
     @Configuration
     @EnableAuthorizationServer
-    public static class MyAuthorizationServerConfig  extends AuthorizationServerConfigurerAdapter {
+    public static class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-
-        @Bean
-        public JwtAccessTokenConverter accessTokenConverter() {
-            return new JwtAccessTokenConverter();
-        }
 
         @Autowired
         @Qualifier("myAuthenticationManager")
         private AuthenticationManager authenticationManager;
 
+        @Bean
+        public JwtAccessTokenConverter accessTokenConverter() {
+            return new JwtAccessTokenConverter();
+        }
 
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -46,13 +45,13 @@ public class OAuthConfig {
                     .authorizedGrantTypes("password")
                     .resourceIds(RESOURCE_ID)
                     .secret("secret")
-                    .scopes("read","write");
+                    .scopes("read", "write");
         }
 
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
             endpoints.authenticationManager(authenticationManager)
-                     .accessTokenConverter(accessTokenConverter());
+                    .accessTokenConverter(accessTokenConverter());
         }
 
     }
@@ -92,8 +91,8 @@ public class OAuthConfig {
             http
                 .authorizeRequests()
                     .antMatchers("/rest/**").hasRole("CLIENT")
-            .and()
-                .csrf().disable();
+                .and()
+                    .csrf().disable();
         }
     }
 }
