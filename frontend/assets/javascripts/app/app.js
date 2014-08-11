@@ -6,7 +6,7 @@ define(['angular'], function (angular) {
     $urlRouterProvider
             .otherwise('home')
 
-    $stateProvider.state('home', { url: '/', template: '<p>merhaba millet</p>', controller: 'MainController' })
+    $stateProvider.state('home', { url: '/', templateUrl: 'templates/index.html', controller: 'MainController' })
     $stateProvider.state('login', { url: '/login', templateUrl: 'templates/login.html', controller: 'LoginController' })
   })
 
@@ -20,8 +20,6 @@ define(['angular'], function (angular) {
       }}
     })
 
-    console.log(TokenServiceProvider)
-
     //TokenServiceProvider.setBaseUrl('http://localhost:8080/rest')
     TokenServiceProvider.setTokenUrl('http://localhost:8080/oauth/token')
     TokenServiceProvider.setClientDetails('web', 'secret')
@@ -32,7 +30,17 @@ define(['angular'], function (angular) {
   }])
 
   app.config(function(RestangularProvider) {
-    RestangularProvider.setBaseUrl('/rest/')
+    RestangularProvider.setBaseUrl('http://localhost:8080/rest/')
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+          var extractedData;
+          if (operation === "getList") {
+            extractedData = data._embedded[what]
+            //extractedData.meta = data.data.meta;
+          } else {
+            extractedData = data[what];
+          }
+          return extractedData;
+        });
   })
 
   return app;

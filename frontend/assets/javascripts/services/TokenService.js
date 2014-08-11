@@ -1,12 +1,14 @@
 define(['angular'], function(angular) {
     var app = angular.module('services.TokenService', []);
-    app.service('TokenStore', [function () {
+    app.service('TokenStore', ['$log', function ($log) {
         var token = "";
         return {
             get: function() {
+                $log.debug('getting token store value ')
                 return token;
             },
             set: function(data) {
+                $log.debug('setting token store value ' + data)
                 token = data;
             }
         }
@@ -33,16 +35,14 @@ define(['angular'], function(angular) {
             clientSecret = secret;
         }
 
-        $httpProvider.interceptors.push(['$q', '$injector', 'TokenStore', function ($q, $injector, TokenStore) {
+        $httpProvider.interceptors.push(['$q', '$injector', '$log', 'TokenStore', function ($q, $injector, $log, TokenStore) {
             return {
                 'request': function (config) {
-                    console.log('inside request ' + clientId + ' ' + clientSecret )
                     if (TokenStore.get()) {
                         config.headers.Authorization = "Bearer " + TokenStore.get();
                     } else if (!!clientId && !!clientSecret) {
                         config.headers.Authorization = "Basic " + window.btoa(clientId + ":" + clientSecret);
                     }
-                    console.log(config.headers.Authorization )
                     return config;
                 },
                 'responseError': function (response) {
@@ -58,14 +58,13 @@ define(['angular'], function(angular) {
             return {
 
                 login: function (username, password) {
-                    console.log("sending " + username)
                     var deferred = $q.defer();
                     $http({
                         method: 'POST',
                         url: tokenUrl,
-                        data: {
-                            "username": username,
-                            "password": password
+                        data: "grant_type=password&username="+ encodeURIComponent(username) + "&password=" + encodeURIComponent(password),
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
                         }
                     }).success(function (data, status, headers, config) {
                         deferred.resolve(data);

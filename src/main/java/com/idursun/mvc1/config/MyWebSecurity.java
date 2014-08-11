@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,7 +15,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
 
 @Configuration
 @EnableWebSecurity
@@ -26,7 +26,6 @@ public class MyWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.inMemoryAuthentication().withUser("admin").password("123").roles("USER","CLIENT");
         auth.userDetailsService(userDetailsService);
     }
 
@@ -38,13 +37,15 @@ public class MyWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class);
 
         http
                 .requestMatcher(new AntPathRequestMatcher("/oauth/**"))
                 .csrf()
-                    .disable()
+                .disable()
                 .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
     }
 }

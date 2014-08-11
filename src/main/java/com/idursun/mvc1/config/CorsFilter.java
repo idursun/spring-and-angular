@@ -1,35 +1,24 @@
 package com.idursun.mvc1.config;
 
-import org.springframework.core.annotation.Order;
-import org.springframework.security.web.FilterChainProxy;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-@Order(1)
-public class CorsFilter implements Filter {
+public class CorsFilter extends OncePerRequestFilter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
-    @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        HttpServletResponse response = (HttpServletResponse) res;
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-        chain.doFilter(req, res);
+        if ("OPTIONS".equals(request.getMethod())) {
+            response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+            response.setHeader("Access-Control-Max-Age", "3600");
+            response.setHeader("Access-Control-Allow-Headers", "authorization, content-type");
+        }
+        filterChain.doFilter(request, response);
     }
-
-    @Override
-    public void destroy() {
-
-    }
-
 }
