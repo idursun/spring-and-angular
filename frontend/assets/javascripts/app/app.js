@@ -23,9 +23,9 @@ define(['angular'], function (angular) {
     //TokenServiceProvider.setBaseUrl('http://localhost:8080/rest')
     TokenServiceProvider.setTokenUrl('http://localhost:8080/oauth/token')
     TokenServiceProvider.setClientDetails('web', 'secret')
-    TokenServiceProvider.loginRedirectHandler = ['$state', function($state) {
+    TokenServiceProvider.setLoginRedirectHandler( ['$state', function($state) {
         $state.go('login')
-    }]
+    }])
 
   }])
 

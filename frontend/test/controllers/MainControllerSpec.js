@@ -1,4 +1,4 @@
-define(['angular','angularMocks', 'controllers'], function (angular, mocks) {
+define(['angular','angularMocks', 'controllers', 'restangular', 'angularUi'], function (angular, mocks) {
   describe('MainCtrl', function () {
     var $scope, ctrl;
 
@@ -7,7 +7,7 @@ define(['angular','angularMocks', 'controllers'], function (angular, mocks) {
     beforeEach(inject(function ($controller, $rootScope) {
       $scope = $rootScope.$new();
 
-      ctrl = $controller('MainCtrl', {
+      ctrl = $controller('MainController', {
         '$scope': $scope
       });
 

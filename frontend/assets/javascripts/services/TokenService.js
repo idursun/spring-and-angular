@@ -19,6 +19,7 @@ define(['angular'], function(angular) {
         var loginUrl = "/login";
         var tokenUrl = "/oauth/token";
         var clientId = null, clientSecret = null;
+        var loginRedirectHandler = angular.noop
 
         this.setLoginUrl = function (url) {
             loginUrl = url || "/login";
@@ -28,7 +29,9 @@ define(['angular'], function(angular) {
             tokenUrl = url || "/oauth/token";
         }
 
-        this.loginRedirectHandler = angular.noop
+        this.setLoginRedirectHandler = function (handler) {
+            loginRedirectHandler = handler || angular.noop
+        }
 
         this.setClientDetails = function (id, secret) {
             clientId = id;
@@ -46,9 +49,11 @@ define(['angular'], function(angular) {
                     return config;
                 },
                 'responseError': function (response) {
-                    if (response.status == 401 && loginRedirectHandler !== null) {
+
+                    if (loginRedirectHandler && response.status == 401 ) {
                         $injector.invoke(loginRedirectHandler)
                     }
+
                     return $q.reject(response);
                 },
             }
