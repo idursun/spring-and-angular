@@ -29,8 +29,9 @@ define(['angular'], function (angular) {
 
   }])
 
-  app.config(function(RestangularProvider) {
+  app.config(['RestangularProvider', function(RestangularProvider) {
     RestangularProvider.setBaseUrl('http://localhost:8080/rest/')
+
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
           var extractedData;
           if (operation === "getList") {
@@ -41,7 +42,7 @@ define(['angular'], function (angular) {
           }
           return extractedData;
         });
-  })
+  }])
 
   return app;
 })
