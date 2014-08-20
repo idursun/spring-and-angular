@@ -7,7 +7,11 @@ define(['angular'], function (angular) {
             .otherwise('home')
 
     $stateProvider.state('home', { url: '/', templateUrl: 'templates/index.html', controller: 'MainController' })
-    $stateProvider.state('login', { url: '/login', templateUrl: 'templates/login.html', controller: 'LoginController' })
+        .state('login', { url: '/login', templateUrl: 'templates/login.html', controller: 'LoginController' })
+        .state('projects', { url: '/projects', templateUrl: 'templates/project.list.html', controller: 'ProjectListController' })
+        .state('projects.detail', { url: '/:id', templateUrl: 'templates/project.detail.html', controller: 'ProjectDetailController' })
+        .state('projects.edit', { url: '/:id/edit', templateUrl: 'templates/project.edit.html', controller: 'ProjectEditController' })
+        .state('projects.delete', { url: '/:id/delete', templateUrl: 'templates/project.delete.html', controller: 'ProjectDeleteController' })
   })
 
   app.config(['$httpProvider','TokenServiceProvider', function($httpProvider, TokenServiceProvider) {
@@ -36,7 +40,7 @@ define(['angular'], function (angular) {
           var extractedData;
           if (operation === "getList") {
             extractedData = data._embedded[what]
-            //extractedData.meta = data.data.meta;
+            extractedData.page = data.page;
           } else {
             extractedData = data[what];
           }

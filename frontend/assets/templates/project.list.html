@@ -1,0 +1,22 @@
+<div ng-controller="ProjectListController">
+    {{ projects.page }}
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Created By</th>
+                <th>Issues</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr ng-repeat="project in projects">
+                <td>{{project.id}}</td>
+                <td><a ui-sref="projects.detail({id: project.id})"> {{project.name}}</a></td>
+                <td>{{project.createdBy}}</td>
+                <td>{{project.issues}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

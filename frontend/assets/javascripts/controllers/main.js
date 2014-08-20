@@ -1,8 +1,9 @@
-define(['angular', './MainController', './LoginController'], function(angular) {
+define(['angular', './MainController', './LoginController', './ProjectControllers'], function(angular) {
 
     return angular.module('controllers', [
-        ,'controllers.MainController'
+        'controllers.MainController'
         ,'controllers.LoginController'
+        ,'controllers.ProjectControllers'
     ]);
 
 })
