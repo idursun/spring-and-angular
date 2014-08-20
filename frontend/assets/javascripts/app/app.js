@@ -42,7 +42,8 @@ define(['angular'], function (angular) {
             extractedData = data._embedded[what]
             extractedData.page = data.page;
           } else {
-            extractedData = data[what];
+            console.log('extracting data from ' + data)
+            extractedData = data;
           }
           return extractedData;
         });

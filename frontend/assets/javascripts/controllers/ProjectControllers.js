@@ -25,6 +25,17 @@ define(['angular'] , function(angular) {
         })
 
     }])
+    app.controller('ProjectDetailController',
+    ['$scope', '$state', 'Restangular',
+    function($scope, $state, Restangular) {
+
+        console.log('id is ' + $state.params.id)
+        Restangular.one('projects', $state.params.id).get().then(function(project) {
+            $scope.project = project;
+            console.log('got ' + project)
+        })
+
+    }])
 
     return app;
 
