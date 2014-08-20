@@ -17,7 +17,7 @@ import java.util.List;
 @Component
 //@Profile("development")
 public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
-    private static Logger logger = Logger.getLogger(MyRestConfig.class);
+    private static Logger logger = Logger.getLogger(DataSeeder.class);
 
     @Autowired
     UserRepository userRepository;
