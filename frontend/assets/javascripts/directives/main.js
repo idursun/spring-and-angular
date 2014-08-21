@@ -1,5 +1,6 @@
-define(['angular', './Dialog'], function(angular) {
+define(['angular', './Dialog', './Paginator'], function(angular) {
     return angular.module('directives', [
-        'directives.Dialog'
+        'directives.Dialog',
+        'directives.Paginator'
     ]);
 })

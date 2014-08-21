@@ -1,5 +1,5 @@
 <div>
-    {{ projects.page }}
+    <paginator totalPages="projects.totalPages" totalPages="projects.number" />
     <table class="table table-stripped">
         <thead>
             <tr>
@@ -13,12 +13,10 @@
         <tbody>
             <tr ng-repeat="project in projects">
                 <td>{{project.id}}</td>
-                <td><a ui-sref="projects.detail({id: project.id})"> {{project.name}}</a></td>
+                <td><a ui-sref="projects_detail({id: project.id})"> {{project.name}}</a></td>
                 <td>{{project.createdBy}}</td>
                 <td>{{project.issues}}</td>
             </tr>
         </tbody>
     </table>
 </div>
-
-<div ui-view></div>
