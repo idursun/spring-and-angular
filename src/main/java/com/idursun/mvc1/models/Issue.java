@@ -1,6 +1,7 @@
 package com.idursun.mvc1.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Issue {
@@ -11,7 +12,9 @@ public class Issue {
 
     int priority;
 
+    @NotNull
     String title;
+    
     String description;
 
     @ManyToOne

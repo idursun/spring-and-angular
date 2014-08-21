@@ -3,6 +3,7 @@ package com.idursun.mvc1.models;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Project {
@@ -18,7 +19,7 @@ public class Project {
     @ManyToOne(optional = true)
     private User createdBy;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project")
     private List<Issue> issues;
 
     public User getCreatedBy() {
@@ -59,5 +60,13 @@ public class Project {
 
     public void setModifiedOn(Date modifiedOn) {
         this.modifiedOn = modifiedOn;
+    }
+
+    public List<Issue> getIssues() {
+        return issues;
+    }
+
+    public void setIssues(List<Issue> issues) {
+        this.issues = issues;
     }
 }
