@@ -12,7 +12,7 @@ define(['angular'] , function(angular) {
 
         var projects = Restangular.all('projects')
 
-        projects.getList({ page: $stateParams.page | 0}).then(function(result) {
+        projects.getList({ page: $stateParams.page }).then(function(result) {
             console.log(result)
             $scope.projects = result;
         })

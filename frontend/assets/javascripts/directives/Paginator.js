@@ -4,9 +4,9 @@ define(['angular'] , function(angular) {
           return {
               restrict: 'E',
               template: '<ul class="pagination">' +
-                '<li ng-class="{disabled: isPrevDisabled() }"><a href="#">&laquo;</a></li>' +
+                '<li ng-class="{disabled: isPrevDisabled() }"><a href="" ng-click="handler({page: page-1})">&laquo;</a></li>' +
                 '<li ng-repeat="p in pages" ng-class="{active: p == page}" ><a href="" ng-click="handler({page: p})" >{{p}}</a></li>' +
-                '<li ng-class="{disabled: isNextDisabled() }"><a href="#">&raquo;</a></li>' +
+                '<li ng-class="{disabled: isNextDisabled() }"><a href="" ng-click="handler({page: page+1})">&raquo;</a></li>' +
               '</ul>'
               ,
               scope: {
@@ -18,19 +18,19 @@ define(['angular'] , function(angular) {
 
                 scope.$watch('totalPages', function(newValue) {
                     scope.pages = [];
-                    for(var i = 0; i < scope.totalPages; i++)
+                    for(var i = 1; i <= scope.totalPages; i++)
                         scope.pages.push(i)
 
                 })
 
-                scope.page = scope.page | 0;
+                scope.page = scope.page || 1;
 
                 scope.isPrevDisabled = function() {
-                    return scope.page == 0;
+                    return scope.page <= 1;
                 }
 
                 scope.isNextDisabled = function() {
-                    return scope.page < scope.totalPages-1;
+                    return scope.page == scope.totalPages;
                 }
 
               }
