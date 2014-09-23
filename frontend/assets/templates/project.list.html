@@ -1,5 +1,6 @@
 <div>
     <paginator total-pages="projects.page.totalPages" page="projects.page.number + 1" handler="goToPage(page)" />
+    <input type="text" placeholder="filter" ng-model="name" /> <input class="btn btn-success" type="button" ng-click="search()" value="search"/>
     <table class="table table-stripped">
         <thead>
             <tr>

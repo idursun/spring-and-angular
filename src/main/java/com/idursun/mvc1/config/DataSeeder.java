@@ -51,11 +51,17 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
             userRepository.save(users);
         }
 
+        final String[] words = {"Dixie", "Taylor", "Urban", "Mate", "Sugar", "Project", "Turb", "Ex", "Ray", "Super", "Awesome"};
+
         if (projectRepository.count() == 0) {
             for (int i = 0; i < 1000; i++) {
                 Project project = new Project();
                 project.setCreatedBy(users.get(i % users.size()));
-                project.setName("project" + i);
+                StringBuilder buffer = new StringBuilder();
+                do {
+                    buffer.append(words[rnd.nextInt(words.length)]);
+                } while(rnd.nextDouble() < .4);
+                project.setName(buffer.toString());
                 project.setCreatedOn(Calendar.getInstance().getTime());
 
                 for (int j = 1; j < 5; j++) {

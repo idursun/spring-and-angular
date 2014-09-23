@@ -10,9 +10,17 @@ define(['angular'] , function(angular) {
             $state.go('projects', { page: p})
         }
 
+        $scope.search = function() {
+            $state.go('projects', { name: $scope.name || ""})
+        }
+
         var projects = Restangular.all('projects')
 
-        projects.getList({ page: $stateParams.page }).then(function(result) {
+        if ($stateParams.name) {
+            projects = projects.all('search').all('findByNameContains')
+        }
+
+        projects.getList({ page: $stateParams.page, name: $stateParams.name }).then(function(result) {
             console.log(result)
             $scope.projects = result;
         })
@@ -27,9 +35,7 @@ define(['angular'] , function(angular) {
             Restangular.all('projects').post($scope.project).then(function(result) {
                 $state.go('^')
             })
-
         }
-
     }])
 
     app.controller('ProjectDetailController',
