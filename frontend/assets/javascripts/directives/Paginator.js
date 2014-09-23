@@ -5,27 +5,34 @@ define(['angular'] , function(angular) {
               restrict: 'E',
               template: '<ul class="pagination">' +
                 '<li ng-class="{disabled: isPrevDisabled() }"><a href="#">&laquo;</a></li>' +
-                '<li ng-repeat="page in pages" ng-class="{active: page == current}" ><a href="#" >{{page}}</a></li>' +
+                '<li ng-repeat="p in pages" ng-class="{active: p == page}" ><a href="" ng-click="handler({page: p})" >{{p}}</a></li>' +
                 '<li ng-class="{disabled: isNextDisabled() }"><a href="#">&raquo;</a></li>' +
               '</ul>'
               ,
               scope: {
                 totalPages: "=",
-                number: "="
+                page: "=",
+                handler: "&"
               },
               link: function(scope, elem, attrs, ctrl) {
 
-                scope.current = 3
+                scope.$watch('totalPages', function(newValue) {
+                    scope.pages = [];
+                    for(var i = 0; i < scope.totalPages; i++)
+                        scope.pages.push(i)
+
+                })
+
+                scope.page = scope.page | 0;
 
                 scope.isPrevDisabled = function() {
-                    return true;
+                    return scope.page == 0;
                 }
 
                 scope.isNextDisabled = function() {
-                    return false;
+                    return scope.page < scope.totalPages-1;
                 }
 
-                scope.pages = [1,2,3,4,5,6,7];
               }
           }
     })

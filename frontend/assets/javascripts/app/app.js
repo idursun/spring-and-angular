@@ -8,7 +8,7 @@ define(['angular'], function (angular) {
 
     $stateProvider.state('home', { url: '/', templateUrl: 'templates/index.html', controller: 'MainController' })
         .state('login', { url: '/login', templateUrl: 'templates/login.html', controller: 'LoginController' })
-        .state('projects', { url: '/projects', templateUrl: 'templates/project.list.html', controller: 'ProjectListController' })
+        .state('projects', { url: '/projects?page', templateUrl: 'templates/project.list.html', controller: 'ProjectListController' })
         .state('projects_detail', { url: '/:id', templateUrl: 'templates/project.detail.html', controller: 'ProjectDetailController' })
         .state('projects_edit', { url: '/:id/edit', templateUrl: 'templates/project.edit.html', controller: 'ProjectEditController' })
         .state('projects_delete', { url: '/:id/delete', templateUrl: 'templates/project.delete.html', controller: 'ProjectDeleteController' })

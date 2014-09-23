@@ -16,7 +16,7 @@ public class Project {
     private Date createdOn;
     private Date modifiedOn;
 
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     private User createdBy;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project")

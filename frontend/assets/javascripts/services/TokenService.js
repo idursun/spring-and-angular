@@ -4,11 +4,9 @@ define(['angular'], function(angular) {
         var token = "";
         return {
             get: function() {
-                $log.debug('getting token store value ')
                 return token;
             },
             set: function(data) {
-                $log.debug('setting token store value ' + data)
                 token = data;
             }
         }

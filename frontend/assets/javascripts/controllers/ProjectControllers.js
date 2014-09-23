@@ -3,11 +3,16 @@ define(['angular'] , function(angular) {
     var app = angular.module('controllers.ProjectControllers', ['restangular', 'ui.router'])
 
 
-    app.controller('ProjectListController', ['$scope', 'Restangular', function($scope, Restangular) {
+    app.controller('ProjectListController', ['$scope', 'Restangular', '$state', '$stateParams', function($scope, Restangular, $state, $stateParams) {
         $scope.projects = [];
+
+        $scope.goToPage = function(p) {
+            $state.go('projects', { page: p})
+        }
+
         var projects = Restangular.all('projects')
 
-        projects.getList({ page: 1}).then(function(result) {
+        projects.getList({ page: $stateParams.page | 0}).then(function(result) {
             console.log(result)
             $scope.projects = result;
         })
