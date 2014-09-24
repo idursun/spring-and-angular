@@ -1,5 +1,22 @@
 <div>
-    <h3>Project Detail</h3>
-    <tt>{{project}}</tt>
-    {{project.name}}
+    <h3>{{project.name}}</h3>
+    Issues:
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>Owner</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="issue in issues">
+                <td>{{issue.title}}</td>
+                <td>{{issue.priority}}</td>
+                <td>{{issue.createdBy}}</td>
+                <td><button class="btn">Edit</button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

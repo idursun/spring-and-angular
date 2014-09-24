@@ -9,9 +9,9 @@ define(['angular'], function (angular) {
     $stateProvider.state('home', { url: '/', templateUrl: 'templates/index.html', controller: 'MainController' })
         .state('login', { url: '/login', templateUrl: 'templates/login.html', controller: 'LoginController' })
         .state('projects', { url: '/projects?page&name', templateUrl: 'templates/project.list.html', controller: 'ProjectListController' })
-        .state('projects_detail', { url: '/:id', templateUrl: 'templates/project.detail.html', controller: 'ProjectDetailController' })
-        .state('projects_edit', { url: '/:id/edit', templateUrl: 'templates/project.edit.html', controller: 'ProjectEditController' })
-        .state('projects_delete', { url: '/:id/delete', templateUrl: 'templates/project.delete.html', controller: 'ProjectDeleteController' })
+        .state('project', { url: '/projects/:id', templateUrl: 'templates/project.detail.html', controller: 'ProjectDetailController' })
+        .state('project.edit', { url: '/edit', templateUrl: 'templates/project.edit.html', controller: 'ProjectEditController' })
+        .state('project.delete', { url: '/delete', templateUrl: 'templates/project.delete.html', controller: 'ProjectDeleteController' })
   })
 
   app.config(['$httpProvider','TokenServiceProvider', function($httpProvider, TokenServiceProvider) {

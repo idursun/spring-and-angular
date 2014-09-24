@@ -42,11 +42,15 @@ define(['angular'] , function(angular) {
     ['$scope', '$state', 'Restangular',
     function($scope, $state, Restangular) {
 
-        console.log('id is ' + $state.params.id)
+        $scope.issues = []
+
         Restangular.one('projects', $state.params.id).get().then(function(project) {
             $scope.project = project;
-            console.log('got ' + project)
         })
+
+        Restangular.one('projects', $state.params.id).all('issues').getList().then(function(issues) {
+           $scope.issues = issues;
+        });
 
     }])
 
