@@ -10,7 +10,8 @@ public class Issue {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    Integer priority;
+    @Basic
+    private int priority;
 
     @NotNull
     String title;
@@ -56,7 +57,11 @@ public class Issue {
         this.project = project;
     }
 
-    public void setPriority(Integer priority) {
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 }
