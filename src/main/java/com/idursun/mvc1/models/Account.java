@@ -41,7 +41,6 @@ public class Account {
         this.email = email;
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }

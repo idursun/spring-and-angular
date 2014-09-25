@@ -1,5 +1,6 @@
 package com.idursun.mvc1.config;
 
+import com.idursun.mvc1.models.AccountValidator;
 import com.idursun.mvc1.models.Issue;
 import com.idursun.mvc1.models.Project;
 import com.idursun.mvc1.models.Account;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.data.rest.core.event.ValidatingRepositoryEventListener;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 import org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver;
 
@@ -36,4 +38,13 @@ public class MyRestConfig extends RepositoryRestMvcConfiguration {
         resolver.setOneIndexedParameters(true);
         return resolver;
     }
+
+    @Override
+    protected void configureValidatingRepositoryEventListener(ValidatingRepositoryEventListener validatingListener) {
+        validatingListener.addValidator("beforeCreate", new AccountValidator());
+    }
+
+
+
+
 }
