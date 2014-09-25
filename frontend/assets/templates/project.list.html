@@ -15,7 +15,7 @@
             <tr ng-repeat="project in projects">
                 <td>{{project.id}}</td>
                 <td><a ui-sref="project({id: project.id})"> {{project.name}}</a></td>
-                <td>{{project.createdBy}}</td>
+                <td>{{project.createdBy.displayName}}</td>
                 <td>{{project.issues}}</td>
             </tr>
         </tbody>

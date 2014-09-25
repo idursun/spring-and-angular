@@ -19,7 +19,7 @@ public class Issue {
     String description;
 
     @ManyToOne
-    private User createdBy;
+    private UserProfile createdBy;
 
     @ManyToOne
     private Project project;
@@ -41,11 +41,11 @@ public class Issue {
         this.description = description;
     }
 
-    public User getCreatedBy() {
+    public UserProfile getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(UserProfile createdBy) {
         this.createdBy = createdBy;
     }
 

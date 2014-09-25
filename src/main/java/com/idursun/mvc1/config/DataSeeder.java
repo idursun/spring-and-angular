@@ -2,17 +2,18 @@ package com.idursun.mvc1.config;
 
 import com.idursun.mvc1.models.Issue;
 import com.idursun.mvc1.models.Project;
-import com.idursun.mvc1.models.User;
+import com.idursun.mvc1.models.Account;
+import com.idursun.mvc1.models.UserProfile;
+import com.idursun.mvc1.services.AccountRepository;
 import com.idursun.mvc1.services.IssueRepository;
 import com.idursun.mvc1.services.ProjectRepository;
-import com.idursun.mvc1.services.UserRepository;
+import com.idursun.mvc1.services.UserProfileRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,7 +25,10 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
     private static Logger logger = Logger.getLogger(DataSeeder.class);
 
     @Autowired
-    UserRepository userRepository;
+    AccountRepository accountRepository;
+
+    @Autowired
+    UserProfileRepository userProfileRepository;
 
     @Autowired
     ProjectRepository projectRepository;
@@ -34,21 +38,28 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        List<User> users = new ArrayList<>();
+        List<Account> accounts = new ArrayList<>();
+        List<UserProfile> userProfiles = new ArrayList<>();
         List<Project> projects = new ArrayList<>();
         List<Issue> issues = new ArrayList<>();
         SecureRandom rnd = new SecureRandom(SecureRandom.getSeed(25));
 
-        if (userRepository.count() == 0) {
+        if (accountRepository.count() == 0) {
             for (int i = 0; i < 25; i++) {
-                User user = new User();
-                user.setName("user" + i);
-                user.setActive(true);
-                user.setEmail("user" + i + "@gmail.com");
-                user.setPassword("12345" + i);
-                users.add(user);
+                Account account = new Account();
+                account.setName("user" + i);
+                account.setActive(true);
+                account.setEmail("user" + i + "@gmail.com");
+                account.setPassword("12345" + i);
+                accounts.add(account);
+
+                UserProfile profile = new UserProfile(account);
+                profile.setDisplayName("User " + i);
+                profile.setReputation(rnd.nextInt(2000));
+                userProfiles.add(profile);
             }
-            userRepository.save(users);
+            accountRepository.save(accounts);
+            userProfileRepository.save(userProfiles);
         }
 
         final String[] words = {"Dixie", "Taylor", "Urban", "Mate", "Sugar", "Project", "Turb", "Ex", "Ray", "Super", "Awesome"};
@@ -56,7 +67,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
         if (projectRepository.count() == 0) {
             for (int i = 0; i < 1000; i++) {
                 Project project = new Project();
-                project.setCreatedBy(users.get(i % users.size()));
+                project.setCreatedBy(userProfiles.get(i % accounts.size()));
                 StringBuilder buffer = new StringBuilder();
                 do {
                     buffer.append(words[rnd.nextInt(words.length)]);
@@ -66,7 +77,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
                 for (int j = 1; j < 5; j++) {
                     Issue issue = new Issue();
-                    issue.setCreatedBy(users.get(i % users.size()));
+                    issue.setCreatedBy(userProfiles.get(i % accounts.size()));
                     issue.setTitle("issue " + j + " for " + project.getName());
                     issue.setPriority(rnd.nextInt(4) + 1);
                     issue.setProject(project);

@@ -1,16 +1,15 @@
 package com.idursun.mvc1.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
-public class User {
+public class Account {
+
     @Id
     @GeneratedValue
     private Long id;
-
     private String name;
     @Column(unique = true)
     private String email;
@@ -42,6 +41,7 @@ public class User {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }

@@ -2,7 +2,7 @@ package com.idursun.mvc1.config;
 
 import com.idursun.mvc1.models.Issue;
 import com.idursun.mvc1.models.Project;
-import com.idursun.mvc1.models.User;
+import com.idursun.mvc1.models.Account;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ public class MyRestConfig extends RepositoryRestMvcConfiguration {
     protected void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         try {
             config.setBaseUri(new URI("/rest"));
-            config.exposeIdsFor(Issue.class, Project.class, User.class);
+            config.exposeIdsFor(Issue.class, Project.class, Account.class);
         } catch (URISyntaxException e) {
             logger.error("failed to set base uri", e);
         }
