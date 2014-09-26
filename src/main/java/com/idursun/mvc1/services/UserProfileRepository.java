@@ -1,6 +1,6 @@
 package com.idursun.mvc1.services;
 
-import com.idursun.mvc1.models.UserProfile;
+import com.idursun.mvc1.domain.UserProfile;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;

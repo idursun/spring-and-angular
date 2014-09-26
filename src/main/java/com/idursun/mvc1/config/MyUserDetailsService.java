@@ -1,6 +1,6 @@
 package com.idursun.mvc1.config;
 
-import com.idursun.mvc1.models.Account;
+import com.idursun.mvc1.domain.Account;
 import com.idursun.mvc1.services.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

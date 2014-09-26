@@ -1,6 +1,6 @@
 package com.idursun.mvc1;
 
-import com.idursun.mvc1.models.Project;
+import com.idursun.mvc1.domain.Project;
 import com.idursun.mvc1.services.ProjectRepository;
 import org.junit.Before;
 import org.junit.Test;

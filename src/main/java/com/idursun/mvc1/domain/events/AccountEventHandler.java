@@ -1,5 +1,6 @@
-package com.idursun.mvc1.models;
+package com.idursun.mvc1.domain.events;
 
+import com.idursun.mvc1.domain.Account;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;

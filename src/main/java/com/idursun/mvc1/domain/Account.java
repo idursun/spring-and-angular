@@ -1,6 +1,4 @@
-package com.idursun.mvc1.models;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.idursun.mvc1.domain;
 
 import javax.persistence.*;
 

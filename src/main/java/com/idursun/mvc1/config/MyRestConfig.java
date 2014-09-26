@@ -1,9 +1,9 @@
 package com.idursun.mvc1.config;
 
-import com.idursun.mvc1.models.AccountValidator;
-import com.idursun.mvc1.models.Issue;
-import com.idursun.mvc1.models.Project;
-import com.idursun.mvc1.models.Account;
+import com.idursun.mvc1.domain.AccountValidator;
+import com.idursun.mvc1.domain.Issue;
+import com.idursun.mvc1.domain.Project;
+import com.idursun.mvc1.domain.Account;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

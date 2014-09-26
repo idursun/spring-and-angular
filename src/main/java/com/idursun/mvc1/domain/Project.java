@@ -1,4 +1,4 @@
-package com.idursun.mvc1.models;
+package com.idursun.mvc1.domain;
 
 import javax.persistence.*;
 import java.util.Date;

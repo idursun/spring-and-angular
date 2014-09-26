@@ -1,9 +1,9 @@
 package com.idursun.mvc1.config;
 
-import com.idursun.mvc1.models.Issue;
-import com.idursun.mvc1.models.Project;
-import com.idursun.mvc1.models.Account;
-import com.idursun.mvc1.models.UserProfile;
+import com.idursun.mvc1.domain.Account;
+import com.idursun.mvc1.domain.Issue;
+import com.idursun.mvc1.domain.Project;
+import com.idursun.mvc1.domain.UserProfile;
 import com.idursun.mvc1.services.AccountRepository;
 import com.idursun.mvc1.services.IssueRepository;
 import com.idursun.mvc1.services.ProjectRepository;
@@ -38,6 +38,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+
         List<Account> accounts = new ArrayList<>();
         List<UserProfile> userProfiles = new ArrayList<>();
         List<Project> projects = new ArrayList<>();
