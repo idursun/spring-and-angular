@@ -57,10 +57,12 @@ define(['angular'], function (angular) {
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
           var extractedData;
           if (operation === "getList" && data) {
-            if ( what in data._embedded)
-                 extractedData = data._embedded[what]
-            else extractedData = data._embedded[Object.keys(data._embedded)[0]]
-
+            extractedData = []
+            if (data._embedded) {
+                if ( what in data._embedded)
+                     extractedData = data._embedded[what]
+                else extractedData = data._embedded[Object.keys(data._embedded)[0]]
+            }
             extractedData.page = data.page || {number: 0, totalPages: 1};
           } else {
             extractedData = data;
