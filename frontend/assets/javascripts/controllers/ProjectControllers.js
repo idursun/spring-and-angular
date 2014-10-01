@@ -21,7 +21,6 @@ define(['angular'] , function(angular) {
         }
 
         projects.getList({ page: $stateParams.page, name: $stateParams.name }).then(function(result) {
-            console.log(result)
             $scope.projects = result;
         })
 
