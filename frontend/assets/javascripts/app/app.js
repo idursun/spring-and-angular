@@ -8,8 +8,26 @@ define(['angular'], function (angular) {
 
     $stateProvider.state('home', { url: '/', templateUrl: 'templates/index.html', controller: 'MainController' })
         .state('login', { url: '/login', templateUrl: 'templates/login.html', controller: 'LoginController' })
-        .state('projects', { url: '/projects?page&name', templateUrl: 'templates/project.list.html', controller: 'ProjectListController' })
-        .state('project', { url: '/projects/:id', templateUrl: 'templates/project.detail.html', controller: 'ProjectDetailController' })
+        .state('projects', { url: '/projects?page&name', templateUrl: 'templates/project.list.html',
+          resolve: {
+            projects: ['Restangular', '$stateParams', function(Restangular, $stateParams) {
+                var projects =  Restangular.all('projects')
+
+                 if ($stateParams.name) {
+                    projects = projects.all('search').all('findByNameContains')
+                 }
+
+                return projects.getList({ page: $stateParams.page, name: $stateParams.name })
+            }]
+        }, controller: 'ProjectListController' })
+        .state('project', { url: '/projects/:id', templateUrl: 'templates/project.detail.html', resolve: {
+            project: ['Restangular', '$stateParams', function(Restangular, $stateParams) {
+                return Restangular.one('projects', $stateParams.id).get()
+            }] ,
+            issues: ['Restangular', '$stateParams', function(Restangular, $stateParams) {
+                return Restangular.one('projects', $stateParams.id).all('issues').getList()
+            }]
+        }, controller: 'ProjectDetailController' })
         .state('project.edit', { url: '/edit', templateUrl: 'templates/project.edit.html', controller: 'ProjectEditController' })
         .state('project.delete', { url: '/delete', templateUrl: 'templates/project.delete.html', controller: 'ProjectDeleteController' })
   })

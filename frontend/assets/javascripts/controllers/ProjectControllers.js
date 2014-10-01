@@ -3,8 +3,8 @@ define(['angular'] , function(angular) {
     var app = angular.module('controllers.ProjectControllers', ['restangular', 'ui.router'])
 
 
-    app.controller('ProjectListController', ['$scope', 'Restangular', '$state', '$stateParams', function($scope, Restangular, $state, $stateParams) {
-        $scope.projects = [];
+    app.controller('ProjectListController', ['$scope', '$state', 'projects', function($scope, $state, projects) {
+        $scope.projects = projects;
 
         $scope.goToPage = function(p) {
             $state.go('projects', { page: p})
@@ -13,17 +13,6 @@ define(['angular'] , function(angular) {
         $scope.search = function() {
             $state.go('projects', { name: $scope.name || ""})
         }
-
-        var projects = Restangular.all('projects')
-
-        if ($stateParams.name) {
-            projects = projects.all('search').all('findByNameContains')
-        }
-
-        projects.getList({ page: $stateParams.page, name: $stateParams.name }).then(function(result) {
-            $scope.projects = result;
-        })
-
     }])
 
     app.controller('ProjectCreateController', ['$scope', function($scope) {
@@ -38,19 +27,10 @@ define(['angular'] , function(angular) {
     }])
 
     app.controller('ProjectDetailController',
-    ['$scope', '$state', 'Restangular',
-    function($scope, $state, Restangular) {
-
-        $scope.issues = []
-
-        Restangular.one('projects', $state.params.id).get().then(function(project) {
-            $scope.project = project;
-        })
-
-        Restangular.one('projects', $state.params.id).all('issues').getList().then(function(issues) {
-           $scope.issues = issues;
-        });
-
+    ['$scope', 'project', 'issues',
+    function($scope, project, issues) {
+        $scope.project = project
+        $scope.issues = issues
     }])
 
     return app;
