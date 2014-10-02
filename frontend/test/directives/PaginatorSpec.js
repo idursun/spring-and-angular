@@ -14,80 +14,43 @@ define(['angular', 'lodash', 'angularMocks', 'angularUi', 'directives'], functio
             $compile(element)(scope);
         }))
 
-        describe('When there are 5 pages and current page is 3: [1][2][3][4][5]', function() {
+        describe('When there are 10 pages and current page is 1', function() {
 
             beforeEach(function() {
-                scope.totalPages = 5;
-                scope.page = 3;
-                scope.$digest()
-            })
-
-            it('should not have gaps', function() {
-                var links = element.find('li')
-                var count = 0
-                for (var i = 0; i < links.length; i++) {
-                    if (links.eq(i).hasClass('gap')) count++
-                };
-                expect(count).toBe(0)
-            })
-
-            it('should have 5 visible page links', function() {
-                var links = element.find('li')
-                var count = 0
-                for (var i = 1; i < links.length-1; i++) {
-                    if (!links.eq(i).hasClass('gap')) count++
-                };
-                expect(count).toBe(5)
-            })
-
-        })
-
-        describe('When there are 6 pages and current page is 1: [1][2][3][4][5]', function() {
-
-            beforeEach(function() {
-                scope.totalPages = 6;
+                scope.totalPages = 10;
                 scope.page = 1;
                 scope.$digest()
             })
 
-            it('should not have gaps', function() {
-                var links = element.find('li')
-                var count = 0
-                for (var i = 0; i < links.length; i++) {
-                    if (links.eq(i).hasClass('gap')) count++
-                };
-                expect(count).toBe(0)
+            it('prev button should be disabled', function() {
+                var links = element.find('a')
+                expect(links.eq(0).hasClass('disabled')).toBe(true)
+            })
+
+            it('next button should be enabled', function() {
+                var links = element.find('a')
+                expect(links.eq(links.length-1).hasClass('disabled')).toBe(false)
             })
 
         })
 
-
-        describe('When there are 20 pages and current page is 10: [1][2]...[8][9][10][11][12]...[19][20]', function() {
+        describe('When there are 10 pages and current page is 10', function() {
 
             beforeEach(function() {
-                scope.totalPages = 20;
+                scope.totalPages = 10;
                 scope.page = 10;
                 scope.$digest()
             })
 
-            it('should have links to page 1, 2', function() {
-                var links = element.find('li a')
-                expect(links.eq(1).text()).toBe("1")
-                expect(links.eq(2).text()).toBe("2")
+            it('prev button should be enabled', function() {
+                var links = element.find('a')
+                expect(links.eq(0).hasClass('disabled')).toBe(false)
             })
 
-            it('should have gap', function() {
-                var links = element.find('li')
-                expect(links.eq(3).text()).toBe("...")
+            it('next button should be disabled', function() {
+                var links = element.find('a')
+                expect(links.eq(links.length-1).hasClass('disabled')).toBe(true)
             })
-
-            it('should have 9 page links', function() {
-                var links = element.find('li a')
-                expect(links.eq(4).text()).toBe("8")
-                expect(links.eq(5).text()).toBe("9")
-                expect(links.eq(6).text()).toBe("10")
-            })
-
         })
 
     });
