@@ -1,13 +1,13 @@
 define(['angular'], function(angular) {
     var app = angular.module('services.TokenService', []);
-    app.service('TokenStore', ['$log', function ($log) {
+    app.service('TokenStore', ['$log', '$window', function ($log, $window) {
         var token = "";
         return {
             get: function() {
-                return token;
+                return $window.sessionStorage.token;
             },
             set: function(data) {
-                token = data;
+                $window.sessionStorage.token = data;
             }
         }
     }])
