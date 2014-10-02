@@ -1,23 +1,28 @@
 <div>
-    <paginator total-pages="projects.page.totalPages" page="projects.page.number + 1" handler="goToPage(page)" />
-    <input type="text" placeholder="filter" ng-model="name" /> <input class="btn btn-success" type="button" ng-click="search()" value="search"/>
-    <table class="table table-stripped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Created By</th>
-                <th>Issues</th>
-            </tr>
-
-        </thead>
-        <tbody>
-            <tr ng-repeat="project in projects">
-                <td>{{project.id}}</td>
-                <td><a ui-sref="project({id: project.id})"> {{project.name}}</a></td>
-                <td>{{project.createdBy.displayName}}</td>
-                <td>{{project.issues}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" placeholder="Filter" ng-model="name" /> <input class="btn btn-success" type="button" ng-click="search()" value="search"/>
+        </div>
+        <div class="col-2-md">
+            <paginator class="pull-right" total-pages="projects.page.totalPages" page="projects.page.number + 1" handler="goToPage(page)" />
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped fixed-width">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Created By</th>
+                    <th>Issues</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="project in projects">
+                    <td class="col-md-6"><a ui-sref="project({id: project.id})"> {{project.name}}</a></td>
+                    <td>{{project.createdBy.displayName}}</td>
+                    <td>{{project.issues}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

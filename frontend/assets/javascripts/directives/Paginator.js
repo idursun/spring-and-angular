@@ -3,11 +3,11 @@ define(['angular'] , function(angular) {
     return app.directive('paginator', function() {
           return {
               restrict: 'E',
-              template: '<a href="" class="btn btn-paginator"  ng-class="{disabled: page <= 1}" ng-click="handler({page: page-1})">&laquo;</a>' +
+              template: '<div class="pager"><a href="" class="btn btn-sm" ng-class="{disabled: page <= 1}" ng-click="handler({page: page-1})"><span class="glyphicon glyphicon-chevron-left"></span></a>' +
                 '<select ng-model="page" ng-options="p for p in pages" ng-change="handler({page: page})">{{p}}</select>' +
-                '<span>/</span>'+
-                '<a href="" class="btn" ng-click="handler({page: totalPages})">{{totalPages}}</a>' +
-                '<a href="" class="btn btn-paginator" ng-class="{disabled: page >= totalPages}" ng-click="handler({page: page+1})">&raquo;</a>'
+                '/'+
+                '<a href="" class="btn btn-sm" ng-click="handler({page: totalPages})">{{totalPages}}</a>' +
+                '<a href="" class="btn btn-sm" ng-class="{disabled: page >= totalPages}" ng-click="handler({page: page+1})"><span class="glyphicon glyphicon-chevron-right"></span></a></div>'
               ,
               scope: {
                 totalPages: "=",
