@@ -24,6 +24,15 @@ exports.config = {
           "asi" : "-"
       }
   },
+  "bower": {
+      "copy": {
+          "mainOverrides" : {
+              "bootstrap": [
+                {'fonts': '/fonts'}
+              ]
+          }
+      }
+  },
   "webPackage" : {
       //outPath: "../src/main/resources/public",
       exclude: [
