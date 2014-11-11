@@ -1,28 +1,10 @@
-<div>
-    <div class="row">
-        <div class="col-md-10">
-            <input type="text" placeholder="Filter" ng-model="name" /> <input class="btn btn-success" type="button" ng-click="search()" value="search"/>
+<md-list>
+  <md-item  ng-repeat="project in projects">
+    <md-item-content flex>
+    	<div class="md-tile-left"></div>
+        <div class="md-tile-content">
+        	<md-button ui-sref="project({id: project.id})">{{project.name}}</md-button>
         </div>
-        <div class="col-2-md">
-            <paginator class="pull-right" total-pages="projects.page.totalPages" page="projects.page.number + 1" handler="goToPage(page)" />
-        </div>
-    </div>
-    <div class="row">
-        <table class="table table-striped fixed-width">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Created By</th>
-                    <th>Issues</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="project in projects">
-                    <td class="col-md-6"><a ui-sref="project({id: project.id})"> {{project.name}}</a></td>
-                    <td>{{project.createdBy.displayName}}</td>
-                    <td>{{project.issues}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+    </md-item-content>
+  </md-item>
+</md-list>
