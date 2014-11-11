@@ -1,3 +1,4 @@
 .idea/
 target/
 spring mvc 1.iml
+src/main/resources/public/
