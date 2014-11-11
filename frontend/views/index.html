@@ -3,7 +3,8 @@
   <head>
     <title>Front app</title>
 
-    <link rel="stylesheet" href="/stylesheets/vendor/bootstrap/bootstrap.css" />
+    <!--<link rel="stylesheet" href="/stylesheets/vendor/bootstrap/bootstrap.css" /> -->
+    <link rel="stylesheet" href="/stylesheets/vendor/angular-material/angular-material.css" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
 
     <script src="/socket.io/socket.io.js"></script>
@@ -13,6 +14,27 @@
 
   </head>
   <body>
+  <header>
+  	Header goes here
+  </header>
+
+  <div layout="vertical">
+
+  	<div>
+  		<md-tabs center>
+			<md-tab id="tab1" aria-controls="tab1-content">
+        	Item One
+		      </md-tab>
+		      <md-tab id="tab2" aria-controls="tab2-content" ng-disabled="data.secondLocked">
+		        {{data.secondLabel}}
+		      </md-tab>
+		      <md-tab id="tab3" aria-controls="tab3-content">
+		        Item Three
+		      </md-tab>
+  		</md-tabs>
+  	</div>
+  	<div>inside2</div>
+  </div>
 
   <div class="navbar" role="navigation">
       <div class="container">

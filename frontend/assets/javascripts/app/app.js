@@ -1,7 +1,8 @@
-define(['angular'], function (angular) {
-
-  var app = angular.module('myApp', ['services', 'controllers', 'directives', 'restangular', 'ui.router'])
-
+define(['angular', 'hammerjs'], function (angular, Hammer) {
+  if (typeof Hammer === 'undefined')
+    console.log(Hammer)
+  
+  var app = angular.module('myApp', ['ngAnimate', 'ngAria', 'ngMaterial', 'services', 'controllers', 'directives', 'restangular', 'ui.router'])
   app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider
             .otherwise('home')
