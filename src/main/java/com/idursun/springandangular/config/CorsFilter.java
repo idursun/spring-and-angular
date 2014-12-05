@@ -1,4 +1,4 @@
-package com.idursun.mvc1.config;
+package com.idursun.springandangular.config;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;

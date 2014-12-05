@@ -1,13 +1,12 @@
-package com.idursun.mvc1.domain.events;
+package com.idursun.springandangular.domain.events;
 
-import com.idursun.mvc1.domain.Account;
-import com.idursun.mvc1.domain.UserProfile;
-import com.idursun.mvc1.services.UserProfileRepository;
+import com.idursun.springandangular.domain.Account;
+import com.idursun.springandangular.domain.UserProfile;
+import com.idursun.springandangular.services.UserProfileRepository;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
-import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 
 @RepositoryEventHandler(Account.class)

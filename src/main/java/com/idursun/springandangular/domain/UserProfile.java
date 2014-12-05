@@ -1,4 +1,4 @@
-package com.idursun.mvc1.domain;
+package com.idursun.springandangular.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

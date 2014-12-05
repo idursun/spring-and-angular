@@ -1,10 +1,9 @@
-package com.idursun.mvc1;
+package com.idursun.springandangular;
 
-import com.idursun.mvc1.domain.Account;
-import com.idursun.mvc1.domain.UserProfile;
-import com.idursun.mvc1.services.AccountRepository;
-import com.idursun.mvc1.services.UserProfileRepository;
-import org.junit.Before;
+import com.idursun.springandangular.domain.Account;
+import com.idursun.springandangular.domain.UserProfile;
+import com.idursun.springandangular.services.AccountRepository;
+import com.idursun.springandangular.services.UserProfileRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

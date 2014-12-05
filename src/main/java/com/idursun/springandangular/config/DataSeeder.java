@@ -1,13 +1,13 @@
-package com.idursun.mvc1.config;
+package com.idursun.springandangular.config;
 
-import com.idursun.mvc1.domain.Account;
-import com.idursun.mvc1.domain.Issue;
-import com.idursun.mvc1.domain.Project;
-import com.idursun.mvc1.domain.UserProfile;
-import com.idursun.mvc1.services.AccountRepository;
-import com.idursun.mvc1.services.IssueRepository;
-import com.idursun.mvc1.services.ProjectRepository;
-import com.idursun.mvc1.services.UserProfileRepository;
+import com.idursun.springandangular.domain.Account;
+import com.idursun.springandangular.domain.Issue;
+import com.idursun.springandangular.domain.Project;
+import com.idursun.springandangular.domain.UserProfile;
+import com.idursun.springandangular.services.AccountRepository;
+import com.idursun.springandangular.services.IssueRepository;
+import com.idursun.springandangular.services.ProjectRepository;
+import com.idursun.springandangular.services.UserProfileRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;

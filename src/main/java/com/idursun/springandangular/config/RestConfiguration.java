@@ -1,9 +1,9 @@
-package com.idursun.mvc1.config;
+package com.idursun.springandangular.config;
 
-import com.idursun.mvc1.domain.AccountValidator;
-import com.idursun.mvc1.domain.Issue;
-import com.idursun.mvc1.domain.Project;
-import com.idursun.mvc1.domain.Account;
+import com.idursun.springandangular.domain.AccountValidator;
+import com.idursun.springandangular.domain.Issue;
+import com.idursun.springandangular.domain.Project;
+import com.idursun.springandangular.domain.Account;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +18,8 @@ import java.net.URISyntaxException;
 
 @Configuration
 @Import(RepositoryRestMvcConfiguration.class)
-public class MyRestConfig extends RepositoryRestMvcConfiguration {
-    private static Logger logger = Logger.getLogger(MyRestConfig.class);
+public class RestConfiguration extends RepositoryRestMvcConfiguration {
+    private static Logger logger = Logger.getLogger(RestConfiguration.class);
 
     @Override
     protected void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {

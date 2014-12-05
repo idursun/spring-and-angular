@@ -1,6 +1,6 @@
-package com.idursun.mvc1.services;
+package com.idursun.springandangular.services;
 
-import com.idursun.mvc1.domain.Project;
+import com.idursun.springandangular.domain.Project;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;

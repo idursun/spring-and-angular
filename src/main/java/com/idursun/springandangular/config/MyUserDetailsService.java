@@ -1,7 +1,7 @@
-package com.idursun.mvc1.config;
+package com.idursun.springandangular.config;
 
-import com.idursun.mvc1.domain.Account;
-import com.idursun.mvc1.services.AccountRepository;
+import com.idursun.springandangular.domain.Account;
+import com.idursun.springandangular.services.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

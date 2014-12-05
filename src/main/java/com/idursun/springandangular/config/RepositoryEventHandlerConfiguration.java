@@ -1,6 +1,6 @@
-package com.idursun.mvc1.config;
+package com.idursun.springandangular.config;
 
-import com.idursun.mvc1.domain.events.AccountEventHandler;
+import com.idursun.springandangular.domain.events.AccountEventHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -1,4 +1,4 @@
 .idea/
 target/
-spring mvc 1.iml
+*.iml
 src/main/resources/public/

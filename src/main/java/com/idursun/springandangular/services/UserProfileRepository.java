@@ -1,7 +1,7 @@
-package com.idursun.mvc1.services;
+package com.idursun.springandangular.services;
 
-import com.idursun.mvc1.domain.Account;
-import com.idursun.mvc1.domain.UserProfile;
+import com.idursun.springandangular.domain.Account;
+import com.idursun.springandangular.domain.UserProfile;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;

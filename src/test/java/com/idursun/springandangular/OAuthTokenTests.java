@@ -1,7 +1,7 @@
-package com.idursun.mvc1;
+package com.idursun.springandangular;
 
-import com.idursun.mvc1.domain.Project;
-import com.idursun.mvc1.services.ProjectRepository;
+import com.idursun.springandangular.domain.Project;
+import com.idursun.springandangular.services.ProjectRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

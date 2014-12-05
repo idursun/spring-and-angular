@@ -1,4 +1,4 @@
-package com.idursun.mvc1;
+package com.idursun.springandangular;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;

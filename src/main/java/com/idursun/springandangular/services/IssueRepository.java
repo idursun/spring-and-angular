@@ -1,6 +1,6 @@
-package com.idursun.mvc1.services;
+package com.idursun.springandangular.services;
 
-import com.idursun.mvc1.domain.Issue;
+import com.idursun.springandangular.domain.Issue;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

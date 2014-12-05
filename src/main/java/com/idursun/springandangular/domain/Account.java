@@ -1,4 +1,4 @@
-package com.idursun.mvc1.domain;
+package com.idursun.springandangular.domain;
 
 import javax.persistence.*;
 
