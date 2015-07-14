@@ -19,9 +19,5 @@ public class CorsConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests().anyRequest().permitAll()
             .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-//                .antMatchers(HttpMethod.OPTIONS, "/oauth/**").permitAll()
-//                .antMatchers(HttpMethod.OPTIONS, "/rest/**").permitAll()
-//        .and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }

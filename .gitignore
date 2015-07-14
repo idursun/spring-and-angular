@@ -2,3 +2,4 @@
 target/
 *.iml
 src/main/resources/public/
+node_modules/

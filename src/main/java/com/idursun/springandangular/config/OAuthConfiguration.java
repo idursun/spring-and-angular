@@ -73,28 +73,24 @@ public class OAuthConfiguration {
             return new JwtTokenStore(accessTokenConverter());
         }
 
-        @Bean
-        public DefaultTokenServices defaultTokenServices() {
+        @Override
+        public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+
             final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
             defaultTokenServices.setTokenStore(tokenStore());
             defaultTokenServices.setTokenEnhancer(accessTokenConverter());
             defaultTokenServices.setClientDetailsService(clientDetailsService);
-            return defaultTokenServices;
-        }
-
-        @Override
-        public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-            resources.resourceId(RESOURCE_ID).tokenServices(defaultTokenServices());
+            resources.resourceId(RESOURCE_ID).tokenServices(defaultTokenServices);
         }
 
         @Override
         public void configure(HttpSecurity http) throws Exception {
 
-            http.requestMatcher(new AntPathRequestMatcher("/rest/**"))
-                    .authorizeRequests().anyRequest().hasRole("CLIENT")
-                .and()
+            http.authorizeRequests().antMatchers("/rest/**").permitAll()
+                    .and()
                     .csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         }
     }
 }
